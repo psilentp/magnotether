@@ -4,9 +4,8 @@ import numpy as np
 import h5py
 import cv2
 import sys
-#from matplotlib import pyplot as plt
 
-flynum = int(sys.argv[1])#
+flynum = int(sys.argv[1])
 
 ###### parameters ######
 light_on_thresh = 10 #threshold to use to find the begining of experiment. Average pixel value.
@@ -25,14 +24,22 @@ def rotate_image(image, angle,center = None):
     return new_image
 
 captured_frames = np.squeeze(np.argwhere(np.array(fly.avepxl)>light_on_thresh))
-
 first_frame = fly.images[captured_frames[0]+flash_offset]
-
 center = (first_frame.shape[0]/2,first_frame.shape[1]/2)
+
+def imgfilter(img,order = 3,gw = 0.1):
+    """downsample the image through an image pyramid
+    and return the weighted high and low-pass representation
+    `gw` is the weight applied to the low-frequency content""" 
+    gpyr = cv2.pyrDown(img)
+    for i in range(order):
+        gpyr = cv2.pyrDown(gpyr)
+    lpyr = gpyr - cv2.pyrDown(cv2.pyrUp(gpyr))
+    return np.hstack((gpyr.ravel()*gw,lpyr.ravel()*(1-gw)))
 
 template = list()
 for i in angles:
-    template.append(cv2.pyrDown(cv2.pyrDown(rotate_image(first_frame,i,center = center))))
+    template.append(imgfilter(rotate_image(first_frame,i,center = center)))
 
 import time
 class timer():
@@ -48,24 +55,22 @@ class timer():
 frame_size = len(first_frame.ravel())
 
 tmr = timer()
-#imt = img_trim
 orientations = list()
 correlations = list()
-
 load_image = list()
 dot_product = list()
 rest_of_loop = list()
 
 for idx in captured_frames:
-    im = cv2.pyrDown(cv2.pyrDown(fly.images[idx])).ravel()
+    im = imgfilter(fly.images[idx])
     load_image.append(tmr.dt())
-    corvals = [np.dot(t.ravel(),im) for t in template]
+    corvals = [np.dot(t,im) for t in template]
     dot_product.append(tmr.dt())
     tidx = np.argmax(corvals)
     correlations.append(corvals)
     orientations.append(angles[tidx])
     if not((idx%200)>0):
-        #from IPython import display
+        from IPython import display
         print idx,angles[tidx]
     rest_of_loop.append(tmr.dt())
 
