@@ -11,6 +11,7 @@ flynum = int(sys.argv[1])
 light_on_thresh = 10 #threshold to use to find the begining of experiment. Average pixel value.
 flash_offset = 50 #deal with the fact that the camera is over-exposed when the light first comes on
 angles = np.linspace(0,360,360*2)[:-1] #resoluton of the angular tracking, larger values yeald slower tracking
+gw = 0.005
 
 fly = flylib.NetFly(flynum)
 fly.open_signals('hdf5')
@@ -39,7 +40,7 @@ def imgfilter(img,order = 3,gw = 0.1):
 
 template = list()
 for i in angles:
-    template.append(imgfilter(rotate_image(first_frame,i,center = center)))
+    template.append(imgfilter(rotate_image(first_frame,i,center = center),gw = gw))
 
 import time
 class timer():
@@ -62,7 +63,7 @@ dot_product = list()
 rest_of_loop = list()
 
 for idx in captured_frames:
-    im = imgfilter(fly.images[idx])
+    im = imgfilter(fly.images[idx],gw = gw)
     load_image.append(tmr.dt())
     corvals = [np.dot(t,im) for t in template]
     dot_product.append(tmr.dt())
