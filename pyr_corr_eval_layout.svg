@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:figurefirst="http://flyranch.github.io/figurefirst/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="6in"
+   height="4.5in"
+   viewBox="0 0 540 405.00001"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="pyr_corr_eval_layout.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.6642638"
+     inkscape:cx="199.81196"
+     inkscape:cy="265.13928"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="in"
+     inkscape:window-width="1680"
+     inkscape:window-height="930"
+     inkscape:window-x="48"
+     inkscape:window-y="92"
+     inkscape:window-maximized="0" />
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-647.36215)">
+    <rect
+       style="opacity:1;fill:#808080;fill-opacity:0.45689655;stroke:none;stroke-width:3.54999995;stroke-miterlimit:1;stroke-dasharray:none;stroke-opacity:0.64313725"
+       id="rect4136-3-6"
+       width="179.52094"
+       height="179.52094"
+       x="37.207096"
+       y="-1007.2955"
+       transform="scale(1,-1)">
+      <figurefirst:axis
+         figurefirst:name="image"
+         figurefirst:spinespec="" />
+    </rect>
+    <rect
+       style="opacity:1;fill:#808080;fill-opacity:0.45689655;stroke:none;stroke-width:3.54999995;stroke-miterlimit:1;stroke-dasharray:none;stroke-opacity:0.64313725"
+       id="rect4136-3-6-7"
+       width="157.49611"
+       height="157.49611"
+       x="48.219505"
+       y="838.78699">
+      <figurefirst:axis
+         figurefirst:projection="polar"
+         figurefirst:name="polar" />
+      <figurefirst:mplmethods
+         figurefirst:set_frame_on="False" />
+    </rect>
+    <rect
+       style="opacity:1;fill:#808080;fill-opacity:0.45689655;stroke:none;stroke-width:3.54999995;stroke-miterlimit:1;stroke-dasharray:none;stroke-opacity:0.64313725"
+       id="rect4136-3-6-0"
+       width="219.20737"
+       height="163.50395"
+       x="307.95407"
+       y="-990.13092"
+       transform="scale(1,-1)">
+      <figurefirst:axis
+         figurefirst:name="angle_likelyhood"
+         figurefirst:spinespec="left,bottom" />
+      <figurefirst:mplmethods
+         figurefirst:set_ylabel="'correlation'" />
+      <figurefirst:mplmethods
+         figurefirst:set_xlabel="'angle'" />
+      <figurefirst:mplmethods
+         figurefirst:set_xbound="0,360" />
+    </rect>
+    <rect
+       y="660.66846"
+       x="86.654091"
+       height="39.653439"
+       width="443.31476"
+       id="rect4136"
+       style="opacity:1;fill:#808080;fill-opacity:0.45689655;stroke:none;stroke-width:3.54999995;stroke-miterlimit:1;stroke-dasharray:none;stroke-opacity:0.64313725">
+      <figurefirst:axis
+         figurefirst:spinespec="left"
+         figurefirst:name="position" />
+      <figurefirst:mplmethods
+         figurefirst:set_ybound="0,6.28" />
+      <figurefirst:mplmethods
+         figurefirst:set_yticks="[0,3.14,6.28]" />
+      <figurefirst:mplmethods
+         figurefirst:set_ylabel="'position'" />
+    </rect>
+    <rect
+       y="724.00677"
+       x="86.654091"
+       height="39.653439"
+       width="443.31476"
+       id="rect4136-3"
+       style="opacity:1;fill:#808080;fill-opacity:0.45689655;stroke:none;stroke-width:3.54999995;stroke-miterlimit:1;stroke-dasharray:none;stroke-opacity:0.64313725">
+      <figurefirst:axis
+         figurefirst:name="velocity"
+         figurefirst:spinespec="left,bottom" />
+      <figurefirst:mplmethods
+         figurefirst:set_ybound="-0.1,0.1" />
+      <figurefirst:mplmethods
+         figurefirst:set_yticks="[-0.3,0,0.3]" />
+      <figurefirst:mplmethods
+         figurefirst:set_ylabel="'velocity'" />
+    </rect>
+  </g>
+</svg>
