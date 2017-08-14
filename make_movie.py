@@ -1,3 +1,5 @@
+#! /usr/bin/python2
+
 from matplotlib import animation
 import numpy as np
 from matplotlib import pyplot as plt
@@ -13,15 +15,15 @@ position = fly.position
 velocity = fly.velocity
 
 ### make the condition blocks
-blocks = fly.order
-block_times = list()
-t = 0
-for b in blocks:
-    block_times.append(t)
-    if b == 'flicker_static\n':
-        t+=10
-    else:
-        t+=30
+#blocks = fly.order
+#block_times = list()
+#t = 0
+#for b in blocks:
+#    block_times.append(t)
+#    if b == 'flicker_static\n':
+#        t+=10
+#    else:
+#        t+=30
 
 ### function to return the correct condition for a given time
 def get_cond(t,blocks,block_times):
@@ -43,7 +45,7 @@ ln = layout.axes['polar'].plot([position[idx],position[idx]],[0,0.5],'-o')
 layout.axes['polar'].patch.set_alpha(0.0)
 layout.axes['polar'].set_ybound(0,1)
 fn = layout.axes['framenum'].text(0,0,str(0),fontsize = 10)
-cond = layout.axes['condition'].text(0,0,get_cond(0,blocks,block_times),fontsize = 10)
+#cond = layout.axes['condition'].text(0,0,get_cond(0,blocks,block_times),fontsize = 10)
 
 ptrace = layout.axes['position'].plot(position[idx-window:idx+window])
 vtrace = layout.axes['velocity'].plot(velocity[idx-window:idx+window])
@@ -69,11 +71,11 @@ def animate(idx):
     vtrace[0].set_data(np.arange(0,r-l),velocity[l:r])
     t = float(times[idx])
     fn.set_text(str(t))
-    cond.set_text(get_cond(t,blocks,block_times))
+    #cond.set_text(get_cond(t,blocks,block_times))
     return img,ln[0],
     if not((idx%200)>0):
             print idx
 #animate(804)   
 #anim = animation.FuncAnimation(fig, animate,frames=np.arange(100,len(times)-1000), interval=20,blit = True)
-anim = animation.FuncAnimation(fig, animate,frames=np.arange(100,20000), interval=20,blit = True)
+anim = animation.FuncAnimation(fig, animate,frames=np.arange(100,10000), interval=20,blit = True)
 anim.save(mpath, fps=30, extra_args=['-vcodec', 'h264', '-pix_fmt','yuv420p'])

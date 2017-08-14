@@ -1,3 +1,5 @@
+#! /usr/bin/python2
+
 from scipy import ndimage
 from thllib import flylib
 import numpy as np
@@ -11,10 +13,20 @@ flynum = int(sys.argv[1])
 light_on_thresh = 10 #threshold to use to find the begining of experiment. Average pixel value.
 flash_offset = 50 #deal with the fact that the camera is over-exposed when the light first comes on
 angles = np.linspace(0,360,360*2)[:-1] #resoluton of the angular tracking, larger values yeald slower tracking
-gw = 0.005
+ds_order = 3 #depth of the image pyramid, higher values yield slower faster tracking but more body inversions.
+gw = 0.1
 
 fly = flylib.NetFly(flynum)
 fly.open_signals('hdf5')
+
+tst_imgs = np.array([fly.images[i,:,:] for i in [np.linspace(0,fly.images.len()-1,100).astype(int)]])
+
+bk_img = np.percentile(np.squeeze(tst_imgs),90,axis = 0)
+print np.shape(bk_img)
+
+bk_img = cv2.pyrDown(bk_img)
+for i in range(ds_order):
+    bk_img = cv2.pyrDown(bk_img)
 
 def rotate_image(image, angle,center = None):
     row,col = image.shape
@@ -28,13 +40,14 @@ captured_frames = np.squeeze(np.argwhere(np.array(fly.avepxl)>light_on_thresh))
 first_frame = fly.images[captured_frames[0]+flash_offset]
 center = (first_frame.shape[0]/2,first_frame.shape[1]/2)
 
-def imgfilter(img,order = 3,gw = 0.1):
+def imgfilter(img,order = ds_order,gw = 0.1):
     """downsample the image through an image pyramid
     and return the weighted high and low-pass representation
-    `gw` is the weight applied to the low-frequency content""" 
+    `gw` is the weight applied to the low-frequency content"""
     gpyr = cv2.pyrDown(img)
     for i in range(order):
         gpyr = cv2.pyrDown(gpyr)
+    gpyr -= bk_img
     lpyr = gpyr - cv2.pyrDown(cv2.pyrUp(gpyr))
     return np.hstack((gpyr.ravel()*gw,lpyr.ravel()*(1-gw)))
 
